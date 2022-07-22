@@ -1,5 +1,5 @@
 import { OrderedList as TiptapOrderedList } from '@tiptap/extension-ordered-list'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { ListView } from '../../../components/blockViews'
 import { meta } from './meta'
 
@@ -9,6 +9,6 @@ export const OrderedList = TiptapOrderedList.extend({
   draggable: true,
 
   addNodeView() {
-    return ReactNodeViewRenderer(ListView)
+    return LegacyReactNodeViewRenderer(ListView)
   }
 })

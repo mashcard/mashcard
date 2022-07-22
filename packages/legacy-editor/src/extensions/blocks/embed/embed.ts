@@ -1,5 +1,5 @@
 import { mergeAttributes, Content } from '@tiptap/core'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { Plugin, PluginKey } from 'prosemirror-state'
 import { BlockJustCreated, MashcardEventBus, EmbedType } from '@mashcard/schema'
 import { EmbedView } from '../../../components/blockViews'
@@ -80,7 +80,7 @@ export const Embed = createBlock<EmbedOptions, EmbedAttributes>({
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(EmbedView)
+    return LegacyReactNodeViewRenderer(EmbedView)
   },
 
   addCommands() {

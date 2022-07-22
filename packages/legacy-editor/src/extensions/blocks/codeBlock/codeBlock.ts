@@ -1,6 +1,6 @@
 import { refractor } from './refractorLanguagesBundle'
 import { CodeBlock as TiptapCodeBlock } from '@tiptap/extension-code-block'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { RefractorPlugin } from './refractor-plugin'
 import { CodeBlockView } from '../../../components/blockViews'
 import { CodeBlockOptions, meta } from './meta'
@@ -28,7 +28,7 @@ export const CodeBlock = TiptapCodeBlock.extend<CodeBlockOptions>({
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(CodeBlockView)
+    return LegacyReactNodeViewRenderer(CodeBlockView)
   },
 
   addProseMirrorPlugins() {
