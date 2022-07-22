@@ -1,7 +1,8 @@
 import { generateUUIDs } from '../testHelper'
+import { mockCell } from '../testMock'
 import { SpreadsheetInput, TestCaseInterface } from '../testType'
 
-const [namespaceId, spreadsheetId, column1Id, row1Id, variableId] = generateUUIDs()
+const [namespaceId, spreadsheetId, column1Id, row1Id, variableId, CELL_A2_ID, VARIABLE_A2_ID] = generateUUIDs()
 
 const A1CellRichType = {
   type: 'spreadsheet',
@@ -32,7 +33,10 @@ export const SpreadsheetVariableTestCase: TestCaseInterface = {
                 name: 'first',
                 displayIndex: 'A',
                 columnId: column1Id,
-                cells: [{ value: '1', variableId }, { value: '=A.1' }]
+                cells: [
+                  { value: '1', variableId },
+                  { value: '=A.1', cellId: CELL_A2_ID, variableId: VARIABLE_A2_ID }
+                ]
               },
               {
                 name: 'second',
@@ -41,6 +45,23 @@ export const SpreadsheetVariableTestCase: TestCaseInterface = {
               }
             ],
             rows: [{ rowId: row1Id }, {}]
+          }
+        ]
+      }
+    ],
+    successTestCases: [
+      {
+        definition: '=spreadsheet.A.2',
+        result: mockCell('1', CELL_A2_ID, 'A', '2'),
+        namespaceId,
+        expected: [
+          { key: 'variableDependencies', match: [{ namespaceId, variableId: VARIABLE_A2_ID }] },
+          {
+            key: 'flattenVariableDependencies',
+            match: [
+              { namespaceId, variableId },
+              { namespaceId, variableId: VARIABLE_A2_ID }
+            ]
           }
         ]
       }

@@ -70,6 +70,7 @@ export const parseTrackCell = (visitor: Visitor, cell: Cell): void => {
     parseTrackVariable(visitor, variable)
   } else {
     visitor.variableDependencies.push({ namespaceId: cell.namespaceId, variableId: cell.variableId })
+    visitor.flattenVariableDependencies.push({ namespaceId: cell.namespaceId, variableId: cell.variableId })
   }
 }
 

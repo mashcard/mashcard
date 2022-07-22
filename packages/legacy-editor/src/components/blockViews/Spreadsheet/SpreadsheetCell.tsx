@@ -83,7 +83,7 @@ export const SpreadsheetCell: React.FC<SpreadsheetCellProps> = ({
       // TODO check no persist
       const value = display(fetchResult(variable.t), formulaContext!).result
       const oldValue = block.text
-      if (value === oldValue) return
+      if (value === oldValue && value) return
       devLog('Spreadsheet cell formula updated', { cellId, value, rootId })
       const newBlock = { ...block, text: value }
       setCurrentBlock(newBlock)
