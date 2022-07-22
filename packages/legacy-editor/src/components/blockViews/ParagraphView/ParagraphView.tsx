@@ -1,9 +1,9 @@
 import { FC } from 'react'
-import { NodeViewContent } from '../../../tiptapRefactor'
 import { css, cx, theme } from '@mashcard/design-system'
 import { BlockContainer } from '../BlockContainer'
 import { ParagraphViewProps } from '../../../extensions/blocks/paragraph/meta'
 import { usePlaceholder } from './usePlaceholder'
+import { useNodeContent } from '@mashcard/editor'
 
 const placeholderStyle = css({
   '&:before': {
@@ -28,6 +28,7 @@ export const ParagraphView: FC<ParagraphViewProps> = props => {
   const placeholderClassName = placeholderStyle()
   const paragraphClassName = paragraphStyles()
   const placeholder = usePlaceholder(editor, node, getPos)
+  const nodeContentRef = useNodeContent<HTMLParagraphElement>()
 
   return (
     <BlockContainer
@@ -36,13 +37,12 @@ export const ParagraphView: FC<ParagraphViewProps> = props => {
       editable="custom"
       deleteNode={deleteNode}
       style={{ position: 'relative' }}
-      actionOptions={['cut', 'copy', 'delete', 'transform']}
-    >
-      <NodeViewContent
+      actionOptions={['cut', 'copy', 'delete', 'transform']}>
+      <p
+        ref={nodeContentRef}
         {...extension.options.HTMLAttributes}
         draggable={false}
         data-placeholder={placeholder}
-        as="p"
         className={cx(placeholderClassName, paragraphClassName)}
       />
     </BlockContainer>

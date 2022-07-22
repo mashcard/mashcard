@@ -4,6 +4,9 @@ import { Decoration, DecorationSource, EditorView, NodeView } from 'prosemirror-
 import { ComponentType } from 'react'
 import { NodePortal } from '../NodePortal'
 import { flushSync } from 'react-dom'
+import { NodeViewContainer } from './NodeViewContainer'
+
+export { useNodeContent } from './NodeViewContainer'
 
 export interface NodePortalStore {
   set: (nodePortal: NodePortal) => void
@@ -11,15 +14,17 @@ export interface NodePortalStore {
 }
 
 export class ReactNodeView implements NodeView {
-  id: string
-  container: HTMLDivElement
-  nodePortalStore: NodePortalStore
-  component: ComponentType<{}>
-  editorView: EditorView
+  private readonly id: string
+  private readonly container: HTMLDivElement
+  private contentContainer: HTMLElement | null
+  private readonly nodePortalStore: NodePortalStore
+  private readonly component: ComponentType<{}>
+  private readonly editorView: EditorView
 
   constructor(component: ComponentType, editorView: EditorView, nodePortalStore: NodePortalStore) {
     this.editorView = editorView
     this.container = document.createElement('div')
+    this.contentContainer = null
     this.nodePortalStore = nodePortalStore
     this.id = uuid()
     this.component = component
@@ -27,13 +32,12 @@ export class ReactNodeView implements NodeView {
     this.renderComponent()
   }
 
-  get dom(): Element {
+  public get dom(): Element {
     return this.container.firstElementChild ?? this.container
   }
 
-  get contentDOM(): HTMLElement | null | undefined {
-    console.log(this.container.querySelector('p'))
-    return this.container.querySelector('p')
+  public get contentDOM(): HTMLElement | null | undefined {
+    return this.contentContainer
   }
 
   update?: ((node: Node, decorations: readonly Decoration[], innerDecorations: DecorationSource) => boolean) | undefined
@@ -44,12 +48,20 @@ export class ReactNodeView implements NodeView {
   ignoreMutation?: ((mutation: MutationRecord) => boolean) | undefined
   destroy?: (() => void) | undefined
 
+  private readonly setContentDOM = (contentDOM: HTMLElement | null): void => {
+    this.contentContainer = contentDOM
+  }
+
   private renderComponent(): void {
     flushSync(() => {
       this.nodePortalStore.set({
         id: this.id,
         container: this.container,
-        child: <this.component />
+        child: (
+          <NodeViewContainer setContentDOM={this.setContentDOM}>
+            <this.component />
+          </NodeViewContainer>
+        )
       })
     })
   }
