@@ -30,6 +30,7 @@ export const EditorContent: FC<EditorContentProps> = ({ editor, ...props }) => {
 
     const element = editorContentRef.current
 
+    console.log(editor.options.element.childNodes[0])
     element.append(...Array.from(editor.options.element.childNodes))
 
     editor.setOptions({

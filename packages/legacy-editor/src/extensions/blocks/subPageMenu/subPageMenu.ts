@@ -1,5 +1,5 @@
 import { mergeAttributes } from '@tiptap/core'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { SubPageMenuView } from '../../../components/blockViews'
 import { createBlock } from '../../common'
 import { meta, SubPageMenuAttributes, SubPageMenuOptions } from './meta'
@@ -39,7 +39,7 @@ export const SubPageMenu = createBlock<SubPageMenuOptions, SubPageMenuAttributes
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(SubPageMenuView)
+    return LegacyReactNodeViewRenderer(SubPageMenuView)
   },
 
   addCommands() {

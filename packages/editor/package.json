@@ -26,5 +26,12 @@
     "lint:type": "run -T tsc",
     "test:jest": "run -T jest",
     "test:jest:fix": "run -T jest --silent -u"
+  },
+  "dependencies": {
+    "@mashcard/active-support": "workspace:^",
+    "prosemirror-model": "^1.18.1",
+    "prosemirror-state": "^1.4.1",
+    "prosemirror-transform": "^1.6.0",
+    "prosemirror-view": "^1.27.0"
   }
 }

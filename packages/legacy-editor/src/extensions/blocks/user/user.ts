@@ -1,5 +1,5 @@
 import { mergeAttributes } from '@tiptap/core'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { UserView } from '../../../components/blockViews'
 import { createBlock, createJSONAttributeHtmlParser, createJSONAttributeHtmlRender } from '../../common'
 import { meta, UserAttributes, UserOptions } from './meta'
@@ -49,7 +49,7 @@ export const User = createBlock<UserOptions, UserAttributes>({
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(UserView)
+    return LegacyReactNodeViewRenderer(UserView)
   },
 
   addCommands() {

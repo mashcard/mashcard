@@ -1,5 +1,5 @@
 import { mergeAttributes } from '@tiptap/core'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { uuid } from '@mashcard/active-support'
 import { SpreadsheetBlockView } from '../../../components/blockViews'
 import { createBlock } from '../../common'
@@ -71,7 +71,7 @@ export const Spreadsheet = createBlock<SpreadsheetOptions, SpreadsheetAttributes
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(SpreadsheetBlockView)
+    return LegacyReactNodeViewRenderer(SpreadsheetBlockView)
   },
 
   addCommands() {

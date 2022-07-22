@@ -1,5 +1,5 @@
 import { Heading as TiptapHeading } from '@tiptap/extension-heading'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { HeadingView } from '../../../components/blockViews'
 import { meta } from './meta'
 
@@ -12,6 +12,6 @@ export const Heading = TiptapHeading.extend({
   draggable: true,
 
   addNodeView() {
-    return ReactNodeViewRenderer(HeadingView)
+    return LegacyReactNodeViewRenderer(HeadingView)
   }
 })

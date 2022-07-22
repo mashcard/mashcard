@@ -1,5 +1,5 @@
 import { mergeAttributes } from '@tiptap/core'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { PageLinkView } from '../../../components/blockViews'
 import { createBlock, createJSONAttributeHtmlParser, createJSONAttributeHtmlRender } from '../../common'
 import { meta, PageLinkAttributes, PageLinkOptions } from './meta'
@@ -54,7 +54,7 @@ export const PageLink = createBlock<PageLinkOptions, PageLinkAttributes>({
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(PageLinkView)
+    return LegacyReactNodeViewRenderer(PageLinkView)
   },
 
   addCommands() {

@@ -1,5 +1,5 @@
 import { mergeAttributes } from '@tiptap/core'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { TocView } from '../../../components/blockViews/TocView'
 import { createBlock } from '../../common'
 import { meta, TocOptions, TocAttributes } from './meta'
@@ -39,7 +39,7 @@ export const Toc = createBlock<TocOptions, TocAttributes>({
   },
 
   addNodeView() {
-    return ReactNodeViewRenderer(TocView)
+    return LegacyReactNodeViewRenderer(TocView)
   },
 
   addCommands() {

@@ -1,5 +1,5 @@
 import { Blockquote as TiptapBlockquote } from '@tiptap/extension-blockquote'
-import { ReactNodeViewRenderer } from '../../../tiptapRefactor'
+import { LegacyReactNodeViewRenderer } from '../../../tiptapRefactor'
 import { BlockquoteView } from '../../../components/blockViews/BlockquoteView'
 import { meta } from './meta'
 
@@ -10,6 +10,6 @@ export interface BlockquoteAttributes {}
 export const Blockquote = TiptapBlockquote.extend({
   name: meta.name,
   addNodeView() {
-    return ReactNodeViewRenderer(BlockquoteView)
+    return LegacyReactNodeViewRenderer(BlockquoteView)
   }
 })
